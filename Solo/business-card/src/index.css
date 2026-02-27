@@ -7,12 +7,14 @@ html{
 body {
   margin: 0;
   padding: 0;
-  background-color: #1A1B21;
+  background-color: #23252C;
   display: flex;
   justify-content: center;
   color: #DCDCDC;
   font-family: "Inter", sans-serif;
   max-width: 500px;
+  box-shadow: -5px 5px 10px rgb(27, 26, 26);
+  border-radius: 10px;
 }
 
 header{
@@ -22,6 +24,9 @@ header{
   margin: 0;
   padding: 0;
   width: 100%;
+  background-color: #1A1B21;
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
 }
 
 .photo {
@@ -101,6 +106,7 @@ nav small {
 }
 
 main {
+  background-color: #1A1B21;
   padding: 2em 1.5em;
 }
 
@@ -112,8 +118,20 @@ main p {
   margin: 0 0 2em;
 }
 
+footer {
+  padding: 2em 0;
+  background-color: #161619;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
 @media (min-width: 500px) {
   body {
+    margin: 2em 0;
     max-width: 400px;
   }
   .photo {
