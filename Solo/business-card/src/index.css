@@ -1,4 +1,9 @@
 
+html{
+  display: flex;
+  justify-content: center;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -7,6 +12,7 @@ body {
   justify-content: center;
   color: #DCDCDC;
   font-family: "Inter", sans-serif;
+  max-width: 500px;
 }
 
 header{
@@ -94,7 +100,22 @@ nav small {
   background-color: #5093E2;
 }
 
+main {
+  padding: 2em 1.5em;
+}
+
+main h2 {
+  margin: 0 0 0.4em;
+}
+
+main p {
+  margin: 0 0 2em;
+}
+
 @media (min-width: 500px) {
+  body {
+    max-width: 400px;
+  }
   .photo {
     max-width: 400px;
   }
