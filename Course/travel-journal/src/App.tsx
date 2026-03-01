@@ -10,6 +10,7 @@ export default function App() {
         {data.map(item => {
           return (
             <Entry
+            key={item.id}
               {...item}
             />
         )})}
