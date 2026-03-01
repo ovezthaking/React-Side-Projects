@@ -1,17 +1,7 @@
-type EntryProps = {
-    img: {
-        src: string,
-        alt: string,
-    },
-    title: string,
-    country: string,
-    googleMapsLink: string,
-    dates: string,
-    text: string
-}
+import type { EntryPropsType } from "../lib/types";
 
 export default function Entry(
-    {img, title, country, googleMapsLink, dates, text}: EntryProps
+    {img, title, country, googleMapsLink, dates, text}: EntryPropsType
 ) {
     return (
         <article className="journal-entry">
