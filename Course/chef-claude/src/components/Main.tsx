@@ -2,10 +2,8 @@ import { useState } from "react"
 
 export default function Main() {
     const [ingredients, setIngredients] = useState<Array<string>>([])
-    
-    const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        const formData = new FormData(e.currentTarget)
+
+    const addIngredient = (formData: FormData) => {
         const newIngredient = formData.get('ingredient')
         if(newIngredient && typeof newIngredient === 'string') {
             setIngredients(prevIng => [...prevIng, newIngredient])
@@ -15,7 +13,7 @@ export default function Main() {
 
     return (
         <main>
-            <form className="add-ingredient-form" onSubmit={handleSubmit}>
+            <form className="add-ingredient-form" action={addIngredient}>
                 <input 
                     type="text"
                     placeholder="e.g. oregano"
