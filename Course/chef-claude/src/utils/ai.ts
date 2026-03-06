@@ -16,20 +16,21 @@ const anthropic = new Anthropic({
     dangerouslyAllowBrowser: true
 })
 
-export const getRecipeFromCChefClaude = async (ingredientsArr: Array<string>) => {
+export const getRecipeFromChefClaude = async (ingredientsArr: Array<string>) => {
     const ingredientString = ingredientsArr.join(', ')
 
     const msg = await anthropic.messages.create({
-        model: "claude-3-haiku-20240307",
+        model: "claude-sonnet-4-5-20250929",
         max_tokens: 1024,
         system: SYSTEM_PROMPT,
         messages: [
             {
                 role: 'user',
-                content: `I have ${ingredientString}. Please give me a recipe you'd reccomend I make!`
+                content: `I have ${ingredientString}. Please give me a recipe you'd recommend I make!`
             },
         ]
     })
 
-    return msg.content[0].text
+    const textBlock = msg.content.find(block => block.type === 'text');
+    return textBlock && textBlock.type === 'text' ? textBlock.text : '';
 }
