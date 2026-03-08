@@ -22,9 +22,9 @@ export default function Main() {
             .catch(e => console.error('Error: ', e))
     }, [])
 
-    const getRandomMeme = () => {
-        const randomIndex = Math.floor(Math.random() * allMemes.length)
-        const newImageUrl = allMemes[randomIndex].url
+    const getRandomMeme = (): void => {
+        const randomIndex: number = Math.floor(Math.random() * allMemes.length)
+        const newImageUrl: string = allMemes[randomIndex].url
 
         setMeme(prevMeme => (
             {
@@ -34,7 +34,7 @@ export default function Main() {
         ))
     }
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const {value, name} = e.currentTarget
 
         setMeme(prevMeme => ({
