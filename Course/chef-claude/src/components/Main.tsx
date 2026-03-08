@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import ClaudeRecipe from "./ClaudeRecipe"
 import IngredientsList from "./IngredientsList"
 import { getRecipeFromChefClaude } from "../utils/ai"
@@ -7,10 +7,16 @@ export default function Main() {
     const [ingredients, setIngredients] = useState<Array<string>>([])
     // const [recipeShown, setRecipeShown] = useState<boolean>(false)
     const [recipe, setRecipe] = useState<string>('')
+    const recipeSection = useRef<HTMLElement>(null)
 
+    useEffect(() => {
+        if(recipe !== '' && recipeSection.current !== null)
+            recipeSection.current.scrollIntoView()
+    }, [recipe])
+    
     const addIngredient = (formData: FormData): void => {
         const newIngredient = formData.get('ingredient')
-        if(newIngredient && typeof newIngredient === 'string') {
+        if(newIngredient && typeof newIngredient === 'string' && !ingredients.includes(newIngredient)) {
             setIngredients(prevIng => [...prevIng, newIngredient])
         }
         console.log(ingredients)
@@ -37,7 +43,7 @@ export default function Main() {
                 <button>Add ingredient</button>
             </form>
 
-            {ingredients.length > 0 && <IngredientsList onClick={getRecipe} ingredients={ingredients}/>}
+            {ingredients.length > 0 && <IngredientsList ref={recipeSection} onClick={getRecipe} ingredients={ingredients}/>}
 
             {recipe && <ClaudeRecipe recipe={recipe} />}
         </main>

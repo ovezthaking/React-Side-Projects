@@ -1,5 +1,7 @@
-export default function IngredientsList({ingredients, onClick}: 
-    {ingredients: Array<string>, onClick: () => void}) {
+import type { Ref } from "react";
+
+export default function IngredientsList({ingredients, onClick, ref}: 
+    {ingredients: Array<string>, onClick: () => void, ref: Ref<HTMLDivElement>}) {
     return (
         <>
             <section>
@@ -10,7 +12,7 @@ export default function IngredientsList({ingredients, onClick}:
                     ))}
                 </ul>
                 {ingredients.length > 3 && <div className="get-recipe-container">
-                    <div>
+                    <div ref={ref}>
                         <h3>Ready for a recipe?</h3>
                         <p>Generate a recipe from your list of ingredients.</p>
                     </div>
