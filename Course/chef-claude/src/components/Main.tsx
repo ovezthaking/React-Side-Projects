@@ -7,11 +7,11 @@ export default function Main() {
     const [ingredients, setIngredients] = useState<Array<string>>([])
     // const [recipeShown, setRecipeShown] = useState<boolean>(false)
     const [recipe, setRecipe] = useState<string>('')
-    const recipeSection = useRef<HTMLElement>(null)
+    const recipeSection = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         if(recipe !== '' && recipeSection.current !== null)
-            recipeSection.current.scrollIntoView()
+            recipeSection.current.scrollIntoView({behavior: 'smooth'})
     }, [recipe])
     
     const addIngredient = (formData: FormData): void => {
