@@ -18,12 +18,21 @@ function App() {
       ))
   }
 
+  const hold = id => {
+    console.log(id)
+  }
+
   const rollDice = () => {
     setDice(generateAllNewDice())
   }
   
   const diceElements = dice.map(obj => (
-    <Die key={obj.id} value={obj.value} isHeld={obj.isHeld}/>
+    <Die 
+      key={obj.id}
+      value={obj.value}
+      isHeld={obj.isHeld}
+      hold={() => hold(obj.id)}
+    />
   ))
 
   return (
