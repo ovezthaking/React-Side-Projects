@@ -25,7 +25,9 @@ function App() {
   }
 
   const rollDice = () => {
-    setDice(generateAllNewDice())
+    setDice(oldDice => oldDice.map(die => 
+      die.isHeld ? die : {...die, value: Math.ceil(Math.random() * 6)}
+    ))
   }
   
   const diceElements = dice.map(obj => (
