@@ -1,8 +1,5 @@
 import { languages } from "./data/languages.js"
 
-
-
-
 function App() {
   const languageElements = languages.map(lang => (
     <span
