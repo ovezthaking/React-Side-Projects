@@ -1,4 +1,18 @@
+import { languages } from "./data/languages.js"
+
+
+
+
 function App() {
+  const languageElements = languages.map(lang => (
+    <span
+      style={{backgroundColor: lang.backgroundColor, color: lang.color}}
+      className="chip"
+      key={lang.name}
+    >
+      {lang.name}
+    </span>
+  ))
 
   return (
     <main>
@@ -9,6 +23,9 @@ function App() {
       <section className="game-status">
         <h2>You win!</h2>
         <p>Well done! 🎉</p>
+      </section>
+      <section className="language-chips">
+        {languageElements}
       </section>
     </main>
   )
