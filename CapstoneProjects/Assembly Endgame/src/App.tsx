@@ -4,8 +4,8 @@ import { languages } from "./data/languages.js"
 function App() {
   const [currentWord, setCurrentWord] = useState<string>('react')
 
-  const wordElements = currentWord.split('').map(letter => 
-    <span>{letter.toUpperCase()}</span>
+  const wordElements = currentWord.split('').map((letter, index) => 
+    <span key={index}>{letter.toUpperCase()}</span>
   )
 
   const languageElements = languages.map(lang => (
