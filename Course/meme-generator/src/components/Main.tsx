@@ -4,7 +4,7 @@ export default function Main() {
     type memeObjType = {imageUrl: string, topText: string, bottomText: string}
 
     const memeObj: memeObjType = {
-        imageUrl: "http://i.imgflip.com/1bij.jpg",
+        imageUrl: "https://i.imgflip.com/1bij.jpg",
         topText: "One does not simply",
         bottomText: "Walk into Mordor",
     }
