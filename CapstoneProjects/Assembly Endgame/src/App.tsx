@@ -60,11 +60,17 @@ function App() {
     )
   })
 
-  const wordElements = currentWord.split('').map((letter, index) => 
-    guessedLetters.includes(letter) ?
-      <span key={index}>{letter.toUpperCase()}</span> :
-      <span key={index}></span>
-  )
+  const wordElements = currentWord.split('').map((letter, index) => {
+    const shouldRevealLetter = guessedLetters.includes(letter) || isGameLost
+    const letterClassName = clsx(
+      isGameLost && !guessedLetters.includes(letter) && "missed-letter"
+    )
+    return (
+       shouldRevealLetter ?
+        <span key={index} className={letterClassName}>{letter.toUpperCase()}</span> :
+        <span key={index}></span>
+    )
+  })
 
   const languageElements = languages.map((lang, index) => {
     const isLanguageLost = index < wrongGuessCount
