@@ -4,6 +4,12 @@ import { languages } from "./data/languages.js"
 function App() {
   const [currentWord, setCurrentWord] = useState<string>('react')
 
+  const alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+  const keyboardElements = alphabet.split('').map((letter, index) =>
+    <button key={index}>{letter.toUpperCase()}</button>
+  )
+
   const wordElements = currentWord.split('').map((letter, index) => 
     <span key={index}>{letter.toUpperCase()}</span>
   )
@@ -33,6 +39,9 @@ function App() {
       </section>
       <section className="word">
         {wordElements}
+      </section>
+      <section className="keyboard">
+        {keyboardElements}
       </section>
     </main>
   )
