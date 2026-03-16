@@ -3,11 +3,20 @@ import { languages } from "./data/languages.js"
 
 function App() {
   const [currentWord, setCurrentWord] = useState<string>('react')
+  const [guessedLetters, setGuessedLetters] = useState<Array<string>>([])
+
+  const addGuessedLetter = (e: React.MouseEvent<HTMLButtonElement>) => { 
+    setGuessedLetters(prevLetters => 
+      prevLetters.includes(e.currentTarget?.textContent) ?
+        prevLetters : 
+        [...prevLetters, e.currentTarget.textContent?.toLowerCase() || '']
+    )
+  }
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
-  const keyboardElements = alphabet.split('').map((letter, index) =>
-    <button key={index}>{letter.toUpperCase()}</button>
+  const keyboardElements = alphabet.split('').map(letter =>
+    <button key={letter} onClick={addGuessedLetter}>{letter.toUpperCase()}</button>
   )
 
   const wordElements = currentWord.split('').map((letter, index) => 
