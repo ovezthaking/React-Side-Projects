@@ -42,6 +42,7 @@ function App() {
     })
     return (
       <button
+        disabled={isGameOver}
         className={className}
         key={letter}
         value={letter}
