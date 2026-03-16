@@ -123,7 +123,7 @@ function App() {
         isGameWon &&
         <Confetti
           recycle={false}
-          numberOfPieces={1000} 
+          numberOfPieces={1000}
         />
       }
       <header>
