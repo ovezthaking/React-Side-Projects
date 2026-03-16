@@ -40,7 +40,9 @@ function App() {
   })
 
   const wordElements = currentWord.split('').map((letter, index) => 
-    <span key={index}>{letter.toUpperCase()}</span>
+    guessedLetters.includes(letter) ?
+      <span key={index}>{letter.toUpperCase()}</span> :
+      <span key={index}></span>
   )
 
   const languageElements = languages.map(lang => (
