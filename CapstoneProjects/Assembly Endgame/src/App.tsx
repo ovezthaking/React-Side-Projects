@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { languages } from "./data/languages.js"
 import clsx from "clsx"
-import { getFarewellText } from "./utils.js"
+import { getFarewellText, getRandomWord } from "./utils.js"
 
 function App() {
-  const [currentWord, setCurrentWord] = useState<string>('react')
+  const [currentWord, setCurrentWord] = useState<string>(() => getRandomWord())
   const [guessedLetters, setGuessedLetters] = useState<Array<string>>([])
 
   const wrongGuessCount: number = guessedLetters.filter(letter =>
@@ -29,6 +29,11 @@ function App() {
         prevLetters : 
         [...prevLetters, selectedLetter]
     )
+  }
+
+  const startNewGame = () => {
+    setCurrentWord(getRandomWord())
+    setGuessedLetters([])
   }
 
   const keyboardElements = alphabet.split('').map(letter =>{
@@ -120,14 +125,22 @@ function App() {
       <section className="word">
         {wordElements}
       </section>
+      {/* Combined visually hidden for screen readers */}
       <section className="sr-only" aria-live="polite" role="status">
+        <p>
+            {currentWord.includes(lastGuessedLetter) ? 
+                `Correct! The letter ${lastGuessedLetter} is in the word.` : 
+                `Sorry, the letter ${lastGuessedLetter} is not in the word.`
+            }
+            You have {languages.length - 1} attempts left.
+        </p>
         <p>Current word {currentWord.split("").map(letter => 
                 guessedLetters.includes(letter) ? letter : "blank").join(' ')}</p>
       </section>
       <section className="keyboard">
         {keyboardElements}
       </section>
-      {isGameOver && <button className="new-game">New Game</button>}
+      {isGameOver && <button onClick={startNewGame} className="new-game">New Game</button>}
     </main>
   )
 }
