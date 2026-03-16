@@ -43,6 +43,8 @@ function App() {
     return (
       <button
         disabled={isGameOver}
+        aria-disabled={guessedLetters.includes(letter)}
+        aria-label={`Letter ${letter}`}
         className={className}
         key={letter}
         value={letter}
@@ -109,7 +111,7 @@ function App() {
         <h1>Assembly: Endgame</h1>
         <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
       </header>
-      <section className={gameStatusClass}>
+      <section aria-live="polite" role="status" className={gameStatusClass}>
         {renderGameStatus()}
       </section>
       <section className="language-chips">
@@ -117,6 +119,10 @@ function App() {
       </section>
       <section className="word">
         {wordElements}
+      </section>
+      <section className="sr-only" aria-live="polite" role="status">
+        <p>Current word {currentWord.split("").map(letter => 
+                guessedLetters.includes(letter) ? letter : "blank").join(' ')}</p>
       </section>
       <section className="keyboard">
         {keyboardElements}
