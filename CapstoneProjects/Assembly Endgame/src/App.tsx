@@ -6,6 +6,12 @@ function App() {
   const [currentWord, setCurrentWord] = useState<string>('react')
   const [guessedLetters, setGuessedLetters] = useState<Array<string>>([])
 
+  const wrongGuessCount: number = guessedLetters.filter(letter =>
+    !currentWord.includes(letter)
+  ).length
+
+  const alphabet = "abcdefghijklmnopqrstuvwxyz"
+
   const addGuessedLetter = (e: React.MouseEvent<HTMLButtonElement>) => {
     const selectedLetter = e.currentTarget.value.toLowerCase()
 
@@ -15,8 +21,6 @@ function App() {
         [...prevLetters, selectedLetter]
     )
   }
-
-  const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
   const keyboardElements = alphabet.split('').map(letter =>{
     const isGuessed = guessedLetters.includes(letter)
@@ -45,15 +49,19 @@ function App() {
       <span key={index}></span>
   )
 
-  const languageElements = languages.map(lang => (
-    <span
-      style={{backgroundColor: lang.backgroundColor, color: lang.color}}
-      className="chip"
-      key={lang.name}
-    >
-      {lang.name}
-    </span>
-  ))
+  const languageElements = languages.map((lang, index) => {
+    const isLanguageLost = index < wrongGuessCount
+    const className = clsx('chip',isLanguageLost && 'lost')
+    return (
+      <span
+        style={{backgroundColor: lang.backgroundColor, color: lang.color}}
+        className={className}
+        key={lang.name}
+      >
+        {lang.name}
+      </span>
+    )
+  })
 
   return (
     <main>
