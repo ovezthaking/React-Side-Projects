@@ -1,23 +1,43 @@
 import { useState } from "react"
 import { languages } from "./data/languages.js"
+import clsx from "clsx"
 
 function App() {
   const [currentWord, setCurrentWord] = useState<string>('react')
   const [guessedLetters, setGuessedLetters] = useState<Array<string>>([])
 
-  const addGuessedLetter = (e: React.MouseEvent<HTMLButtonElement>) => { 
+  const addGuessedLetter = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const selectedLetter = e.currentTarget.value.toLowerCase()
+
     setGuessedLetters(prevLetters => 
-      prevLetters.includes(e.currentTarget?.textContent) ?
+      prevLetters.includes(selectedLetter) ?
         prevLetters : 
-        [...prevLetters, e.currentTarget.textContent?.toLowerCase() || '']
+        [...prevLetters, selectedLetter]
     )
   }
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
-  const keyboardElements = alphabet.split('').map(letter =>
-    <button key={letter} onClick={addGuessedLetter}>{letter.toUpperCase()}</button>
-  )
+  const keyboardElements = alphabet.split('').map(letter =>{
+    const isGuessed = guessedLetters.includes(letter)
+    const isCorrect = isGuessed && currentWord.includes(letter)
+    const isWrong = isGuessed && !currentWord.includes(letter)
+
+    const className = clsx({
+      correct: isCorrect,
+      wrong: isWrong
+    })
+    return (
+      <button
+        className={className}
+        key={letter}
+        value={letter}
+        onClick={addGuessedLetter}
+      >
+        {letter.toUpperCase()}
+      </button>
+    )
+  })
 
   const wordElements = currentWord.split('').map((letter, index) => 
     <span key={index}>{letter.toUpperCase()}</span>
