@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react"
 
 export default function Main() {
-    type memeObjType = {imageUrl: string, topText: string, bottomText: string}
+    type memeObjType = {imageUrl: string, topText: string, bottomText: string, imageAlt: string}
 
     const memeObj: memeObjType = {
         imageUrl: "https://i.imgflip.com/1bij.jpg",
         topText: "One does not simply",
         bottomText: "Walk into Mordor",
+        imageAlt: "One Does Not Simply"
     }
 
     const [meme, setMeme] = useState<memeObjType>(memeObj)
-    const [allMemes, setAllMemes] = useState<{url: string}[]>([])
+    const [allMemes, setAllMemes] = useState<{url: string, name: string}[]>([])
 
     useEffect(() => {
         fetch('https://api.imgflip.com/get_memes')
@@ -25,11 +26,13 @@ export default function Main() {
     const getRandomMeme = (): void => {
         const randomIndex: number = Math.floor(Math.random() * allMemes.length)
         const newImageUrl: string = allMemes[randomIndex].url
+        const newMemeName: string = allMemes[randomIndex].name
 
         setMeme(prevMeme => (
             {
                 ...prevMeme,
-                imageUrl: newImageUrl
+                imageUrl: newImageUrl,
+                imageAlt: newMemeName
             }
         ))
     }
@@ -68,7 +71,7 @@ export default function Main() {
                 <button onClick={getRandomMeme}>Get a new meme image 🖼</button>
             </div>
             <div className="meme">
-                <img src={meme.imageUrl} />
+                <img src={meme.imageUrl} alt={meme.imageAlt}/>
                 <span className="top">{meme.topText}</span>
                 <span className="bottom">{meme.bottomText}</span>
             </div>
