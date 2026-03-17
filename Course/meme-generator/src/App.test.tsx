@@ -27,4 +27,17 @@ describe('App', () => {
 
         expect(screen.getByText('Code without coffee')).toBeInTheDocument()
     })
+
+    test('Gives new meme after click a button', async () => {
+        const user = userEvent.setup()
+        render(<App />)
+
+        const button = screen.getByRole('button')
+
+        await user.click(button)
+
+        const meme = screen.getAllByRole('img')[1] as HTMLImageElement
+
+        expect(meme.src).toBe('https://i.imgflip.com/1c1uej.jpg')
+    })
 })
