@@ -3,11 +3,49 @@
 @theme {
   --font-sans: "Inter", sans-serif;
   --font-heading: "Karla", "Segoe UI", sans-serif;
+  --color-btn-primary: #4d5b9e;
+  --color-btn-primary-hover: #3e4b86;
+  --color-btn-text: #f5f7fb;
+  --radius-primary-btn: 0.875rem;
+  --space-primary-btn-x: 3.5rem;
+  --space-primary-btn-y: 0.75rem;
+  --color-btn-seconary: #4d5b9e;
+  --color-btn-seconary-hover: #3e4b86;
+  --radius-seconary-btn: 0.6rem;
+  --space-seconary-btn-x: 1.75rem;
+  --space-seconary-btn-y: 0.75rem;
 }
 
 body {
   font-family: var(--font-sans);
   font-size: 1rem;
+}
+
+@layer components {
+  .btn-primary {
+    border-radius: var(--radius-primary-btn);
+    padding: var(--space-primary-btn-y) var(--space-primary-btn-x);
+    background-color: var(--color-btn-primary);
+    color: var(--color-btn-text);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-btn-primary-hover);
+  }
+
+  .btn-seconary {
+    border-radius: var(--radius-seconary-btn);
+    padding: var(--space-seconary-btn-y) var(--space-seconary-btn-x);
+    background-color: var(--color-btn-seconary);
+    color: var(--color-btn-text);
+    font-weight: 500;
+    font-size: 0.85rem;
+    font-family: var(--font-sans);
+  }
+
+  .btn-seconary:hover {
+    background-color: var(--color-btn-seconary-hover);
+  }
 }
 
 /* :root {
