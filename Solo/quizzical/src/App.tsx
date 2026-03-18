@@ -12,7 +12,7 @@ function App() {
   }
 
   return (
-    <main className="relative overflow-hidden min-h-screen">
+    <main className="relative overflow-hidden min-h-screen flex justify-center">
       {screen === 'start' && 
         <LandingPage handleStart={handleStart}/>
       }
