@@ -1,5 +1,11 @@
 import { decode } from "he"
 
+interface resultType {
+    question: string,
+    correct_answer: string,
+    incorrect_answers: Array<string>
+}
+
 export const getQuestions = async () => {
     try {
         const res = await fetch('https://opentdb.com/api.php?amount=5')
@@ -7,10 +13,10 @@ export const getQuestions = async () => {
         
         const data = await res.json()
         
-        const questionsArray = data.results.map((result: any) => {
+        const questionsArray = data.results.map((result: resultType) => {
             const question = decode(result.question)
             const correctAnswer = decode(result.correct_answer)
-            const answers = [correctAnswer, ...result.incorrect_answers.map(decode)]
+            const answers = [correctAnswer, ...result.incorrect_answers.map((ans) => decode(ans))]
 
             return {
                 question,
