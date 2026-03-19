@@ -1,8 +1,16 @@
-export const getQuestions = () => {
-    
+export const getQuestions = async () => {
+    try {
+        const res = await fetch('https://opentdb.com/api.php?amount=5')
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        
+        const data = await res.json()
+
+    } catch (err) {
+        console.error('Error getting questions: ', err)
+    }
 }
 
-function shuffleArray(array) {
+function shuffleArray(array: Array<unknown>) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
