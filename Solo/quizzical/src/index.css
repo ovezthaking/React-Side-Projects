@@ -87,8 +87,8 @@ body {
   opacity: 50%;
 }
 
-button:disabled {
-
+.checked {
+  background-color: #D6DBF5;
 }
 
 /* :root {
