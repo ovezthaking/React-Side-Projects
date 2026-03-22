@@ -34,6 +34,7 @@ export default function Question(
                             key={index}
                             value={ans}
                             className={buttonClassName}
+                            disabled={isChecked}
                         >
                             {ans}
                         </button>
