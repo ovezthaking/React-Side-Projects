@@ -5,11 +5,12 @@ interface questionProps {
     answers: Array<string>
     correct: string
     isChecked: boolean,
-    selectedAnswer: string
+    selectedAnswer: string | null
+    onSelectAnswer: (answer: string) => void
 }
 
 export default function Question(
-    { question, answers, correct, isChecked, selectedAnswer }: questionProps
+    { question, answers, correct, isChecked, selectedAnswer, onSelectAnswer }: questionProps
 ) {
     return (
         <div className="w-full border-b-2 border-b-[#DBDEF0] my-5">
@@ -24,7 +25,7 @@ export default function Question(
                     const tailwindClasses = 'answer hover:bg-[#889cfc] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#F5F7FB]'
                     const buttonClassName = clsx(tailwindClasses, {
                         correct: ans === correct && isChecked,
-                        incorrect: ans === selectedAnswer && isChecked,
+                        incorrect: ans === selectedAnswer && isChecked && ans !== correct,
                         selected: !isChecked && ans === selectedAnswer
                     })
 
@@ -35,6 +36,7 @@ export default function Question(
                             value={ans}
                             className={buttonClassName}
                             disabled={isChecked}
+                            onClick={() => onSelectAnswer(ans)}
                         >
                             {ans}
                         </button>
