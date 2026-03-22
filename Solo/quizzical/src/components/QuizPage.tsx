@@ -19,7 +19,12 @@ export default function QuizPage() {
             {questions.length > 0 && questions ?
                 <section className="flex flex-col items-center w-5xl pt-12 px-10 md:w-3xl">
                     {questions.map((question: questionType, index: number) => (
-                        <Question key={index} question={question.question} answers={question.answers} />
+                        <Question
+                            key={index}
+                            question={question.question}
+                            answers={question.answers}
+                            correct={question.correct}
+                        />
                     ))}
                     <div className="mt-7">
                         <button className="btn-seconary">Check answers</button>
